@@ -3,6 +3,8 @@
 #include<d3d12.h> //Chapter3_2_2 
 #include<dxgi1_6.h>//Chapter3_2_2 
 #include<vector>//Chapter3_2_2 
+#define _USE_MATH_DEFINES
+#include<math.h>// ex01
 
 //#define DEF_TEST
 
@@ -236,8 +238,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ShowWindow(hwnd, SW_SHOW);
 
 	MSG	msg = {};
-	float clearColor[] = { 1.0f, 1.0f, 0.0f, 1.0f }; //黄色
-
+	float clearColor[] = { 0.5f, 0.5f, 0.0f, 1.0f }; //黄色
+	UINT f = 0;	// ex01
 	while (true) {
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
@@ -247,6 +249,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (msg.message == WM_QUIT) {
 			break;
 		}
+
+		//ex01
+		f++;
+		clearColor[0] = sin(sin((f % 180) / 180.0f * M_PI) * M_PI);
 
 		// Chapter3_3_6
 		// スワップチェーンを動作
